@@ -13,14 +13,15 @@ These instructions will get the project up and running on your local machine for
 ### Prerequisites
 
 V-REP : http://www.coppeliarobotics.com/downloads.html 
+
 C++14
 
 (Windows): Visual Studio 2017 or higher
+
 (Windows): After having installed V-REP some files need to be added to the "models" and "scenes" folder. The files that need to be copied can be found in the "VREP_Files" directory of the plugin files. 
-(1) move the "catModel.ttm" and "Servo_Module.ttm" files to the in the "models" directory.
-(2) move the "DefaultERLight.ttt" file to the "scenes" folder. 
 
 (Linux) : Cmake
+
 (Linux) : IDE such as CLion
 
 
@@ -33,13 +34,20 @@ C++14
 #### Compiling the code (Windows) 
 
 (1) To compile the code on Windows, move all the files in a new directory in the "programming" subdirectory that can be found in the main repository of V-REP. 
+
 (2) After copying the files, open the Visual Studio solution file ("v_repExtER.sln") with Visual Studio. You should see two projects called "ERClient" and "v_repExtER". 
+
 v_repExtER is the main plugin used in V-REP and ERClient can be used to parallelize the evolutionary algorithm by opening and communicating with multiple V-REP instances. 
+
 (3) Right click both projects and press "retarget solution" in order to use the toolset version of Visual Studio that you have installed.
 You should now be able to compile the program. 
+
 (4.1) move the "catModel.ttm" and "Servo_Module.ttm" files to the in the "models" directory.
+
 (4.2) move the "DefaultERLight.ttt" file to the "scenes" folder. 
+
 (5) In order to run an evolutionary experiment, you can run the v_repExtER project. 
+
 When running this project it should generate a .dll plugin and start V-REP with a few arguments that tells it to run an evolutionary experiment.
 However, in order to store all the data of an evolutionary run, you are required to create a directory in the V-REP main directory called "files" which should contain a subdirectoy called "genomes0". 
 This additional step is not needed when the GUI is used (The GUI automatically generates these folders).
@@ -47,12 +55,19 @@ This additional step is not needed when the GUI is used (The GUI automatically g
 #### Compiling the code (Linux)
 
 You can use CMake to compile the code on Linux. (also on windows if you're not using visual studio)
+
 (1) Once the files are downloaded create a "build" directory in the folder of the downloaded files.
+
 (2) cd to this "build" directory and run "cmake ../" . 
+
 (3) run "make" to compile the code
+
 (4) After compilation, move the lib_vrepExtER.so file in the main directory of V-REP. 
+
 (5.1) move the "catModel.ttm" and "Servo_Module.ttm" files to the in the "models" directory.
+
 (5.2) move the "DefaultERLight.ttt" file to the "scenes" folder. 
+
 (6) You can now open V-REP with the arguments -g0 and -g2 to see some robots evolving. : "./vrep.sh -g0 -g2"
 
 The first three arguments you give to V-REP should tell the plugin (1) the experiment number, (2) the running mode, and (3) the location of the saved files. 
