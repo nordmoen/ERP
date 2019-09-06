@@ -30,7 +30,7 @@ Settings::Settings() {
 	lIncrements = 4; // not used, should be somewhere else?
 //	environmentType = ENV_SWITCHOBJECTIVE;
 //	controlType = ANN_DEFAULT;
-	verbose = true;
+	verbose = false;
 	//verbose = true;
 	controlType = ANN_CUSTOM;
 	initialInputNeurons = 1;

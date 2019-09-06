@@ -22,7 +22,7 @@ fileRepository = "files"
 runNumber = 0
 buttonSize = [16,1]
 individualCounter = 0
-
+directoryInProgramming = "ERP" # add your directory here. 
 
 if (os.name == 'nt'):
 	print("Running windows")
@@ -314,9 +314,9 @@ class SimulationFrame(Frame):
 		# -gREMOTEAPISERVERSERVICE_"+ str(i+1040000) + "_FALSE_FALSE"])
 		if (os.name == 'nt'):
 			# subprocess.Popen([r""+directory+"/programming/v_repExtER_Integration/x64/Debug/ERClient.exe",directory+"/files" ,"0" ,str(self.coreButton.get())])
-			subprocess.Popen([r""+directory+"/programming/ER_Personal/x64/Debug/ERClient.exe",directory+"/files" ,"0" ,str(self.coreButton.get())])
+			subprocess.Popen([r""+directory+"/programming/" + directoryInProgramming + "/x64/Debug/ERClient.exe",directory+"/files" ,"0" ,str(self.coreButton.get())])
 		else:
-			subprocess.Popen([r""+directory+"/programming/Cplusplus_Evolution/build/ERClient/ERClient", directory+"/files" ,"0" ,str(self.coreButton.get())])
+			subprocess.Popen([r""+directory+"/programming/"+directoryInProgramming+"/build/ERClient/ERClient", directory+"/files" ,"0" ,str(self.coreButton.get())])
 
 
 class MajorButtons(Frame):
@@ -363,7 +363,7 @@ class Window(Frame):
 		self.init_window()
 
 	def init_window(self):
-		self.master.title("Ecosystem Manager GUI")
+		self.master.title("Evolutionary Robotics Plugin for V-REP GUI")
 		#self.pack(fill=BOTH, expand=1)
 		
 		menu = Menu(self.master)
