@@ -110,19 +110,29 @@ To see how evolution is progressing, you can open the data analyser tab and pres
 This should create a plot from data in the file "SavedGenerations0.csv" (located in the files repository) which stores all the fitness values of the individuals that have been evaluated. 
 The three lines of the plot depict the maximum fitness, average fitness and the minimum fitness of each generation. The filled color between two lines depicts the 25 and 75 percentiles.
 
+## Structure of the code
+
+For this plugin, the "v_repExtER.cpp" file is the main file that communicates with the other classes of the program. 
+This file initializes the other classes and communicates with the plugin by calling the three functions "ER_VREP::startSimulation()", "ER_VREP::handleSimulation()" and "ER_VREP::endOfSimulation()".
+The startOfSimulation contains some conditional statements that will automatically create a "phenotype" from a "genotype" created by the evolutionary algorithm. 
+The handleSimulation function updates the created robot every simulation frame. The endOfSimulation function calls a fitness function for the created robot that will give a performance measure of the robot. 
+
+There are several factory patterns in the code that are responsible for creating the (1) evolutionary algorithm, (2) morphology of the robot, (3) the controllers of the robot, 
+(4) the neurons that can be incorporated in the controllers, (5) the modules of the robot, and (6) the environment that the robot will roam in.
+For more information you can contact me, I will soon upload documentation as well.  
+
 ### Break down
 
 ## Development
 
 ## Deployment
 
-TODO: Add additional notes about how to deploy this 
-
 ## Contributing
 
 ## Known bugs
 
-There is currently unfortunately no way to stop the evolution once it is running on a linux machine. 
+There is currently unfortunately no way to stop the evolution once it is running on a linux machine. Right now, "killall -9 vrep" is the unelegant way of stopping it. 
+You can also specify the maximum number of generations after which VREP will stop automatically.
 
 ## Versioning
 
@@ -132,8 +142,11 @@ There is currently unfortunately no way to stop the evolution once it is running
 
 [contributors]
 Andres Faina
+
 Edgar Buchanan
+
 Wei Li
+
 Matteo De Carlo
 
 ## License
@@ -142,5 +155,5 @@ This project is licensed under the GNU License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-
+Thanks to the IT University of Copenhagen, the project Flora-Robotica, Edinburgh Napier University and the Autonomous Robot Evolution project for supporting the development of this software package. 
     
