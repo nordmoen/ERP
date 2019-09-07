@@ -6,6 +6,8 @@ It also contains a small GUI that can be opened using python 3 and the TKinter p
 
 For more information about the science behind the plugin, find my PhD dissertation at: https://en.itu.dk/~/media/en/research/phd-programme/phd-defences/2018/phd-thesis-final-version-frank-veenstra-pdf.pdf?la=en 
 
+![](example.gif)
+
 ## Getting Started
 
 These instructions will get the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
@@ -25,7 +27,6 @@ Note: the when running evolution you can not quit the simulator directly. On win
 (Linux) : Cmake
 
 (Linux) : IDE such as CLion
-
 
 #### Using the GUI
 
