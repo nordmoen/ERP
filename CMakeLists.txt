@@ -37,6 +37,7 @@ set(SOURCES
 
     ERFiles/EA_Factory.cpp
     ERFiles/EA_SteadyState.cpp
+    ERFiles/EA_CoEvolution.cpp
     ERFiles/EA.cpp
 
     ERFiles/env/BasicSunEnv.cpp
@@ -49,6 +50,9 @@ set(SOURCES
     ERFiles/env/MovingSunEnv.cpp
     ERFiles/env/RoughMoveEnv.cpp
     ERFiles/env/WaterEnv.cpp
+	ERFiles/env/TrainingEnvironment.cpp
+	ERFiles/env/CoEvolutionEnv.cpp
+	ERFiles/env/EnvPhototaxis.cpp
 
     ERFiles/ER_VREP.cpp
     ERFiles/ER.cpp
