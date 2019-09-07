@@ -64,17 +64,19 @@ You can use CMake to compile the code on Linux. (also on windows if you're not u
 
 (1) Once the files are downloaded create a "build" directory in the folder of the downloaded files.
 
-(2) cd to this "build" directory and run "cmake ../" . 
+(2) Adjust the repository in the first line of the "CMakeList.txt" file (line 4) to the your V-REP installation directory.
 
-(3) run "make" to compile the code
+(3) cd to this "build" directory and run "cmake ../" . 
 
-(4) After compilation, move the lib_vrepExtER.so file in the main directory of V-REP. 
+(4) run "make" to compile the code
 
-(5.1) move the "catModel.ttm" and "Servo_Module.ttm" files to the in the "models" directory.
+(5) After compilation, move the lib_vrepExtER.so file in the main directory of V-REP. 
 
-(5.2) move the "DefaultERLight.ttt" file to the "scenes" folder. 
+(6.1) move the "catModel.ttm" and "Servo_Module.ttm" files to the in the "models" directory.
 
-(6) You can now open V-REP with the arguments -g0 and -g2 to see some robots evolving. : "./vrep.sh -g0 -g2"
+(6.2) move the "DefaultERLight.ttt" file to the "scenes" folder. 
+
+(7) You can now open V-REP with the arguments -g0 and -g2 to see some robots evolving. : "./vrep.sh -g0 -g2"
 
 If nothing happens or an error pops up, it might be due to the settings file not being properly deleted (see "Running evolutionary experiments" below)
 
