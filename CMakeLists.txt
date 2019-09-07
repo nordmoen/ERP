@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.0)
 project(ER)
 
-#set(VREP_FOLDER "your directory here ~/VREP/V-REP_PRO_EDU_V3_6_1_Ubuntu18_04")
+set(VREP_FOLDER "C:/Program Files/V-REP3/V-REP_PRO_EDU/")
 
 if (NOT VREP_FOLDER)
     message(FATAL_ERROR "VREP_FOLDER variable not set, please set the variable to the vrep location. Example: -DVREP_FOLDER=/usr/share/vrep/")
@@ -70,7 +70,6 @@ set(SOURCES
     ERFiles/morphology/CustomMorphology.cpp
     ERFiles/morphology/Development.cpp
     ERFiles/morphology/ER_CPPN_Encoding.cpp
-    ERFiles/morphology/ER_CPPN.cpp
     ERFiles/morphology/ER_DirectEncoding.cpp
     ERFiles/morphology/ER_LSystem.cpp
     ERFiles/morphology/FixedBaseMorphology.cpp
