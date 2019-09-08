@@ -1,7 +1,19 @@
 <!DOCTYPE html>
 <html>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+<h1>Evolutionary Robotics Plugin for V-REP</h1>
+<p>
+    This plugin for V-REP is an abstraction of the evolutionary robotics plugin that was developed during my PhD on evolving Modular Robots.
+    This plugin contains a simple evolutionary algorithm, encodings that can create modular robots, a simple control architecture, and the possibility to evolve fixed morphology robots in V-REP.
+    It also contains a small GUI that can be opened using python 3 and the TKinter package.
+
+    For more information about the science behind the plugin, see my <a href="https://en.itu.dk/~/media/en/research/phd-programme/phd-defences/2018/phd-thesis-final-version-frank-veenstra-pdf.pdf?la=en">PhD dissertation</a>.
+</p>
+<p>
+    ERP was designed for evolving modular robots, robots that are made up of components that isolate part of the functionality of the entire robot.
+    However, ERP is not limited to just evolving modular robot. It can also automatically identify some of the joints and sensors used in other robots simulated in V-REP enabling the user to automatically evolve the behavior of a robot.
+    A challenge in evolutionary robotics is the difficulty in changing the controller and morphologies of robots at the same time.
+    In this plugin, this challenge can be addressed by experimenting with the (1)  <a href="EA.html">evolutionary algorithm</a> , (2) morphologies and encoding strategies, (3) controllers, (4) artificial neurons, (5) environments, and (6) Module types.
+</p>
 </body>
 </html>

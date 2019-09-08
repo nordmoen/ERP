@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>ERP: Evolutionary Algorithm</h1>
+    <p>
+        The evolutionary algorithm that is currently implented is a mu+lambda EA. 
+        In this EA, the next generation of individuals is combined with the previous generation of individuals and the worst individuals are deleted so that the population size remains constant.
+        This type of evolutionary algorithm is very 'elitist' (it favors generating robots that resemble the best robots so far) and has the downside of prematurely converging. 
+        However, this EA is good enough to quickly get a robot to move in a certain direction. 
+    </p>
+    <p>
+        The evolutionary algorithm works by calling a 'selection' (AKA offspring selection) and a 'replacement' (AKA survivor selection) operator. 
+        The selection operator selects new individuals that will need to be evaluated; it creates an offspring population. 
+        The replacement operator decides how to replace individuals in the parent population with individuals in the offspring population.
+    </p>
+    <p>
+        Using the ERP GUI, you can select different selection and replacement operators under the 'settings' -> 'evolutionary algorithm' tab. 
+    </p>
+</body>
+</html>
