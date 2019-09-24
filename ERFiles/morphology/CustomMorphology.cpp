@@ -123,11 +123,10 @@ void CustomMorphology::update() {
 		vector<float> output = control->update(input);
 		//cout << output[0] << endl;
 		for (int i = 0; i < output.size(); i++) {
-			//if (i < outputHandles.size()) {
-				//simSetJointTargetVelocity(outputHandles[i], output[i] * 1000);// output[i]);
-				//simSetJointTargetPosition(outputHandles[i], output[i]);
-			simSetJointTargetVelocity(outputHandles[i], output[i]);
-			//}
+			if (i < outputHandles.size()) {
+				simSetJointTargetVelocity(outputHandles[i], output[i] * 1000);// output[i]);
+				simSetJointTargetPosition(outputHandles[i], output[i]);
+			}
 		}
 	}
 }
@@ -139,16 +138,26 @@ int CustomMorphology::getMainHandle()
 
 void CustomMorphology::create()
 {
-	//	simLoadModel("C:\\Program Files\\V-REP3\\V-REP_PRO_EDU\\models\\NAOwithoutscript.ttm");
-	//	mainHandle = simGetObjectHandle("NAO");
 	if (control) {
 		if (settings->verbose) {
 			cout << "At create Custom morphology, control is present" << endl;
 		}
 	}
-	simLoadModel("C:\\Program Files\\V-REP3\\V-REP_PRO_EDU\\models\\Pioneer_noscript.ttm");
-	name = "Pioneer_p3dx";
+
+	// set the name of the robot
+	// name = "Pioneer_p3dx";
+	name = "NAO";
+
+	// you can now load the actual model by referencing to it's absolute or relative path (by default, the simLoadModel function looks in the models folder)
+	// simLoadModel("<The name of your model here>")
+	simLoadModel("C:\\Program Files\\V-REP3\\V-REP_PRO_EDU\\models\\NAOwithoutscript.ttm");
+	mainHandle = simGetObjectHandle("NAO");
+
+	// In order to create a closed loop controller you either need to make a function that retrieves all the handles of the sensors or
+	// manually assign the sensor handles as is done in the pioneer example below. 
+
 	if (name == "Pioneer_p3dx") {
+		simLoadModel("C:\\Program Files\\V-REP3\\V-REP_PRO_EDU\\models\\Pioneer_noscript.ttm");
 		mainHandle = simGetObjectHandle(name.c_str());
 		int s1 = simGetObjectHandle("Pioneer_p3dx_ultrasonicSensor4");
 		int s2 = simGetObjectHandle("Pioneer_p3dx_ultrasonicSensor6");
@@ -214,16 +223,15 @@ void CustomMorphology::saveGenome(int indNum, float fitness) {
 	genomeFile << "#EndControlParams" << endl;
 	genomeFile << "end of custom morphology" << endl;
 	cout << "saved Custom morphology" << endl;
-	
+
 	genomeFile.close();
 }
 
 void CustomMorphology::init() {
-	create();
 	unique_ptr<ControlFactory> controlFactory(new ControlFactory);
 	control = controlFactory->createNewControlGenome(0, settings, randomNum); // ann
 	controlFactory.reset();
-	control->init(4, 4, 4);
+	control->init(30, 30, 30);
 	control->mutate(0.5);
 }
 

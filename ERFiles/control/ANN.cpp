@@ -4,19 +4,19 @@
 
 ANN::ANN()
 {
-//	std::cout << "creating ANN" << endl; 
-//	init(1,1,1); 
-//	printNeuronValues();
+	//	std::cout << "creating ANN" << endl; 
+	//	init(1,1,1); 
+	//	printNeuronValues();
 }
 
 
 ANN::~ANN()
 {
-//	std::cout << "deleting ANN" << endl; 
+	//	std::cout << "deleting ANN" << endl; 
 }
 
 void ANN::init(int input, int inter, int output) {
-//	cout << "initializing control" << endl;
+	//	cout << "initializing control" << endl;
 	unique_ptr<NeuronFactory> neuronFactory(new NeuronFactory);
 	neuronID = 0;
 	for (int i = 0; i < input; i++) {
@@ -55,7 +55,7 @@ void ANN::init(int input, int inter, int output) {
 //	inputLayer[0]->connections.push_back(recurrentLayer[0]);
 	inputLayer[0]->connectionsID.push_back(recurrentLayer[0]->neuronID);
 	inputLayer[0]->connectionWeights.push_back(1.0);
-//	recurrentLayer[0]->connections.push_back(outputLayer[0]);
+	//	recurrentLayer[0]->connections.push_back(outputLayer[0]);
 	for (int i = 0; i < recurrentLayer.size(); i++) {
 		if (i < outputLayer.size()) {
 			recurrentLayer[i]->connectionsID.push_back(outputLayer[i]->neuronID);
@@ -67,11 +67,11 @@ void ANN::init(int input, int inter, int output) {
 			// recurrentLayer[i]->connectionWeights.push_back(1.0);
 		}
 	}
-//	cout << "OUTPUTSIZE = " << outputLayer.size() << endl;
+	//	cout << "OUTPUTSIZE = " << outputLayer.size() << endl;
 	changeConnectionIDToPointer();
 	checkConnections();
 	neuronFactory.reset();
-//	cout << "OUTPUTSIZE = " << outputLayer.size() << endl;
+	//	cout << "OUTPUTSIZE = " << outputLayer.size() << endl;
 }
 
 void ANN::reset() {
@@ -89,21 +89,21 @@ void ANN::reset() {
 void ANN::checkConnections() { // this function deletes the connections to deleted neurons and in turn the pointer to these neurons should go out of scope. 
 //	cout << "in" << inputLayer.size() << endl;
 	for (int i = 0; i < inputLayer.size(); i++) {
-//		cout << "conID:" << inputLayer[i]->connectionsID.size() << endl;
-//		cout << "con:" << inputLayer[i]->connections.size() << endl;
+		//		cout << "conID:" << inputLayer[i]->connectionsID.size() << endl;
+		//		cout << "con:" << inputLayer[i]->connections.size() << endl;
 		for (int j = 0; j < inputLayer[i]->connections.size(); j++) {
 			if (inputLayer[i]->connections[j] == NULL) {
-	//			cout << "ERROR: connection " << j << " of neuron " << i << " is NULL" << endl;
-	//			for (int k = 0; k < inputLayer[i]->connections.size(); k++) {
-	//				cout << "Con " << k << " = " << inputLayer[i]->connections[k] << endl;
-	//				cout << "Con ID " << k << " = " << inputLayer[i]->connectionsID[k] << endl;
-	//			}
+				//			cout << "ERROR: connection " << j << " of neuron " << i << " is NULL" << endl;
+				//			for (int k = 0; k < inputLayer[i]->connections.size(); k++) {
+				//				cout << "Con " << k << " = " << inputLayer[i]->connections[k] << endl;
+				//				cout << "Con ID " << k << " = " << inputLayer[i]->connectionsID[k] << endl;
+				//			}
 
 			}
-	//		cout << "j:" << j << endl;
-	//		cout << "/" << inputLayer[i]->connectionsID[j] << endl;
-	//		cout << "/" << inputLayer[i]->connections[j] << endl;
-			
+			//		cout << "j:" << j << endl;
+			//		cout << "/" << inputLayer[i]->connectionsID[j] << endl;
+			//		cout << "/" << inputLayer[i]->connections[j] << endl;
+
 			if (inputLayer[i]->connections[j]->neuronID == -1) {
 				inputLayer[i]->connections[j].reset();
 				inputLayer[i]->connections.erase(inputLayer[i]->connections.begin() + j);
@@ -129,8 +129,8 @@ void ANN::checkConnections() { // this function deletes the connections to delet
 			}
 		}
 	}
-//	cout << "checked connections" << endl;
-//	printNeuronValues();
+	//	cout << "checked connections" << endl;
+	//	printNeuronValues();
 }
 
 void ANN::addInput(vector<float> input) {
@@ -149,34 +149,36 @@ void ANN::addInput(vector<float> input) {
 }
 
 vector<float> ANN::update(vector<float> sensorValues) {
-	vector<float> outputValues; 
-	cout << "updating ANN" << endl;
+	vector<float> outputValues;
 	for (int i = 0; i < sensorValues.size(); i++) {
 		inputLayer[i]->input += sensorValues[i];
+	}
+	for (int i = 0; i < inputLayer.size(); i++) {
 		inputLayer[i]->update();
 	}
 	for (int i = 0; i < recurrentLayer.size(); i++) {
 		recurrentLayer[i]->update();
-	//	cout << "recurrent neuron output = " << recurrentLayer[i]->output << endl;
+		//	cout << "recurrent neuron output = " << recurrentLayer[i]->output << endl;
 	}
 	cf = 0.0;
 	for (int i = 0; i < outputLayer.size(); i++) {
 		outputLayer[i]->update();
 		outputValues.push_back(outputLayer[i]->output);
-		cf += ((0.5 * outputLayer[i]->output/outputLayer.size()));
-//		cout << "cf = " << cf << endl;
-//		cout << "outputLayer[i]->output" << outputLayer[i]->output << endl;
-//		cout << "outputLyerSize = " << outputLayer.size() << endl;
-	//	cout << "output neuron output = " << outputLayer[i]->output << endl;
+		cf += ((0.5 * outputLayer[i]->output / outputLayer.size()));
+		//		cout << "cf = " << cf << endl;
+		//		cout << "outputLayer[i]->output" << outputLayer[i]->output << endl;
+		//		cout << "outputLyerSize = " << outputLayer.size() << endl;
+			//	cout << "output neuron output = " << outputLayer[i]->output << endl;
 	}
 	cf += 0.5;
-//	printNeuronValues();
-	//leaky(0.8);
+	//	printNeuronValues();
+		//leaky(0.8);
 	for (int i = 0; i < outputValues.size(); i++)
 	{
-		cout << outputValues[i] << endl;	
+		//cout << outputValues[i];	
 	}
-	return outputValues; 
+	//cout << endl;
+	return outputValues;
 }
 
 void ANN::leaky(float lr) {
@@ -257,7 +259,7 @@ void ANN::mutateConnections(float mutationRate) {
 					//					cout << "changed connection to out" << endl;
 				}
 			}
-			
+
 		}
 	}
 	//	cout << "input connections mutated" << endl;
@@ -323,7 +325,7 @@ void ANN::mutateConnections(float mutationRate) {
 					//					cout << "mutated to output" << endl;
 				}
 			}
-		
+
 		}
 	}
 }
@@ -346,7 +348,7 @@ void ANN::addNeurons(float mutationRate) {
 			if (randomNum->randFloat(0, 1) < 0.5) {
 				int outputConnection = randomNum->randInt(outputLayer.size(), 0);
 				recurrentLayer[recurrentLayer.size() - 1]->connectionsID.push_back(outputLayer[outputConnection]->neuronID);
-				recurrentLayer[recurrentLayer.size() - 1]->connectionWeights.push_back(randomNum->randFloat(-1.0,1.0));
+				recurrentLayer[recurrentLayer.size() - 1]->connectionWeights.push_back(randomNum->randFloat(-1.0, 1.0));
 			}
 			else {
 				int recConnection = randomNum->randInt(recurrentLayer.size(), 0);
@@ -367,14 +369,14 @@ void ANN::removeNeurons(float mutationRate) {
 				cout << "removing neuron" << endl;
 			}
 			int randNeur = randomNum->randInt(recurrentLayer.size(), 0);
-	//		cout << "Removing neuron nr: " << randNeur << endl;
+			//		cout << "Removing neuron nr: " << randNeur << endl;
 			int deletedID = recurrentLayer[randNeur]->neuronID;
-	//		cout << "deleted neuron ID = " << deletedID << endl;
+			//		cout << "deleted neuron ID = " << deletedID << endl;
 			recurrentLayer.erase(recurrentLayer.begin() + randNeur);
 			for (int j = 0; j < inputLayer.size(); j++) {
 				for (int k = 0; k < inputLayer[j]->connectionsID.size(); k++) {
 					if (inputLayer[j]->connectionsID[k] == deletedID) {
-					//	cout << "Erasing" << endl;
+						//	cout << "Erasing" << endl;
 						inputLayer[j]->connectionsID.erase(inputLayer[j]->connectionsID.begin() + k);
 						inputLayer[j]->connectionWeights.erase(inputLayer[j]->connectionWeights.begin() + k);
 						//	inputLayer[j]->connections.erase(inputLayer[j]->connections.begin() + k);
@@ -382,14 +384,14 @@ void ANN::removeNeurons(float mutationRate) {
 					}
 				}
 			}
-	//		cout << "Neuron Removed" << endl;
+			//		cout << "Neuron Removed" << endl;
 			for (int j = 0; j < recurrentLayer.size(); j++) {
 				for (int k = 0; k < recurrentLayer[j]->connectionsID.size(); k++) {
 					if (recurrentLayer[j]->connectionsID[k] == deletedID) {
 						recurrentLayer[j]->connectionsID.erase(recurrentLayer[j]->connectionsID.begin() + k);
 						recurrentLayer[j]->connectionWeights.erase(recurrentLayer[j]->connectionWeights.begin() + k);
 
-				//		recurrentLayer[j]->connections.erase(recurrentLayer[j]->connections.begin() + k);
+						//		recurrentLayer[j]->connections.erase(recurrentLayer[j]->connections.begin() + k);
 						k--; // array gets one shorter;
 							 //	for (int m = 0; m < inputLayer.size(); m++) { 
 							 //		for (int n = 0; n < inputLayer[m]->connectionsID.size(); n++) {
@@ -428,7 +430,7 @@ void ANN::changeNeurons(float mutationRate) { // debugging required
 				for (int k = 0; k < inputLayer[j]->connectionsID.size(); k++) {
 					if (inputLayer[j]->connectionsID[k] == deletedID) {
 						inputLayer[j]->connectionsID[k] = recurrentLayer[i]->neuronID;
-			//			inputLayer[j]->connections[k] = recurrentLayer[i];
+						//			inputLayer[j]->connections[k] = recurrentLayer[i];
 					}
 				}
 			}
@@ -446,7 +448,7 @@ void ANN::changeNeurons(float mutationRate) { // debugging required
 }
 
 void ANN::mutate(float mutationRate) {
-//	cout << "Mutating ANN" << endl;
+	//	cout << "Mutating ANN" << endl;
 	for (int i = 0; i < inputLayer.size(); i++) {
 		if (randomNum->randFloat(0.0, 1.0) < mutationRate) {
 			inputLayer[i]->mutate(mutationRate);
@@ -463,11 +465,11 @@ void ANN::mutate(float mutationRate) {
 	mutateConnections(mutationRate);
 	addNeurons(mutationRate);
 	removeNeurons(mutationRate);
-//	changeNeurons(mutationRate);//	NOT WORKING?
+	//	changeNeurons(mutationRate);//	NOT WORKING?
 
 	changeConnectionIDToPointer();
 	checkConnections();
-//	cout << "ANN MUTATED" << endl;
+	//	cout << "ANN MUTATED" << endl;
 }
 
 shared_ptr<Control> ANN::clone() const {
@@ -492,7 +494,7 @@ shared_ptr<Control> ANN::clone() const {
 void ANN::printNeuronValues() {
 	std::cout << "printingNeuronValues: " << endl;
 	for (int i = 0; i < inputLayer.size(); i++) {
-		inputLayer[i]->printNeuron(); 
+		inputLayer[i]->printNeuron();
 	}
 	for (int i = 0; i < recurrentLayer.size(); i++) {
 		recurrentLayer[i]->printNeuron();
@@ -500,16 +502,16 @@ void ANN::printNeuronValues() {
 	for (int i = 0; i < outputLayer.size(); i++) {
 		outputLayer[i]->printNeuron();
 	}
-	std::cout << "done printing neuron values" << endl; 
+	std::cout << "done printing neuron values" << endl;
 }
 
 stringstream ANN::getControlParams() {
 	stringstream ss;
 	ss << ",#controlType,0," << endl;
-	ss << "\t" << ",#AmountInputNeurons," << inputLayer.size() << ","<< endl;
+	ss << "\t" << ",#AmountInputNeurons," << inputLayer.size() << "," << endl;
 	for (int i = 0; i < inputLayer.size(); i++) {
 		ss << "\t\t" << ",#StartNeuron,";
-		ss << inputLayer[i]->getNeuronParams().str(); 
+		ss << inputLayer[i]->getNeuronParams().str();
 		ss << "\t\t" << ",#EndNeuron," << endl;
 	}
 	ss << "\t" << ",#AmountInterNeurons," << recurrentLayer.size() << "," << endl;
@@ -525,7 +527,7 @@ stringstream ANN::getControlParams() {
 		ss << "\t\t" << ",#EndNeuron," << endl;
 	}
 	ss << endl;
-//	printNeuronValues();
+	//	printNeuronValues();
 	return ss;
 }
 
@@ -564,14 +566,14 @@ void ANN::setControlParams(vector<string> values) {
 			}
 			else {
 				recurrentLayer.push_back(neuron);
-			}		
-			
+			}
+
 			neuronValues.clear();
-			checkingNeuron = false; 
+			checkingNeuron = false;
 		}
 	}
 	changeConnectionIDToPointer();
-//	printNeuronValues();
+	//	printNeuronValues();
 }
 
 void ANN::cloneControlParameters(shared_ptr<Control> parent) {
@@ -595,8 +597,8 @@ void ANN::changeConnectionIDToPointer() {
 	//	cout << "changing connection ID to pointer" << endl;
 	for (int i = 0; i < inputLayer.size(); i++) {
 		if (inputLayer[i]->connections.size() != inputLayer[i]->connectionsID.size()) {
-	//		cout << "ERROR: connections" << i << ".size() = " << inputLayer[i]->connections.size();
-	//		cout << ", while: connectionsID" << i << ".size() = " << inputLayer[i]->connectionsID.size() << endl;
+			//		cout << "ERROR: connections" << i << ".size() = " << inputLayer[i]->connections.size();
+			//		cout << ", while: connectionsID" << i << ".size() = " << inputLayer[i]->connectionsID.size() << endl;
 		}
 		inputLayer[i]->connections.resize(inputLayer[i]->connectionsID.size());
 		for (int j = 0; j < inputLayer[i]->connectionsID.size(); j++) {
@@ -604,7 +606,7 @@ void ANN::changeConnectionIDToPointer() {
 				if (inputLayer[i]->connectionsID[j] == recurrentLayer[k]->neuronID) {
 					inputLayer[i]->connections[j] = recurrentLayer[k];
 					if (recurrentLayer[k] == NULL) {
-		//				cout << "ERROR: recurrent layer " << k << " = NULL" << endl;
+						//				cout << "ERROR: recurrent layer " << k << " = NULL" << endl;
 					}
 				}
 			}
@@ -612,7 +614,7 @@ void ANN::changeConnectionIDToPointer() {
 				if (inputLayer[i]->connectionsID[j] == outputLayer[k]->neuronID) {
 					inputLayer[i]->connections[j] = outputLayer[k];
 					if (outputLayer[k] == NULL) {
-	//					cout << "ERROR: output layer " << k << " = NULL" << endl;
+						//					cout << "ERROR: output layer " << k << " = NULL" << endl;
 					}
 				}
 			}
@@ -628,7 +630,7 @@ void ANN::changeConnectionIDToPointer() {
 				if (recurrentLayer[i]->connectionsID[j] == recurrentLayer[k]->neuronID) {
 					recurrentLayer[i]->connections[j] = recurrentLayer[k];
 					if (recurrentLayer[k] == NULL) {
-	//					cout << "ERROR: recurrent layer " << k << " = NULL" << endl;
+						//					cout << "ERROR: recurrent layer " << k << " = NULL" << endl;
 					}
 				}
 			}
@@ -636,12 +638,12 @@ void ANN::changeConnectionIDToPointer() {
 				if (recurrentLayer[i]->connectionsID[j] == outputLayer[k]->neuronID) {
 					recurrentLayer[i]->connections[j] = outputLayer[k];
 					if (outputLayer[k] == NULL) {
-	//					cout << "ERROR: output layer " << k << " = NULL" << endl;
+						//					cout << "ERROR: output layer " << k << " = NULL" << endl;
 					}
 				}
 			}
 			if (recurrentLayer[i]->connections[j] == NULL) {
-	//			cout << "ERROR: recurrentLayer[" << i << "]->connections[" << j << "]" << " = NULL" << endl;
+				//			cout << "ERROR: recurrentLayer[" << i << "]->connections[" << j << "]" << " = NULL" << endl;
 			}
 		}
 	}
@@ -656,13 +658,13 @@ void ANN::changeConnectionPointerToID() {
 			for (int k = 0; k < recurrentLayer.size(); k++) {
 				if (inputLayer[i]->connections[j] == recurrentLayer[k]) {
 					inputLayer[i]->connectionsID[j] = recurrentLayer[k]->neuronID;
-					
+
 				}
 			}
 			for (int k = 0; k < outputLayer.size(); k++) {
 				if (inputLayer[i]->connections[j] == outputLayer[k]) {
 					inputLayer[i]->connectionsID[j] = outputLayer[k]->neuronID;
-					
+
 				}
 			}
 		}

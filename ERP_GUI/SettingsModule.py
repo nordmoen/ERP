@@ -163,7 +163,7 @@ class MorphologyParameters(Frame):
 
 		self.morphLabel = Label(parent,text="Evolution type")
 		self.morphLabel.grid(column = 0, row = 0)
-		self.morphOptions = {'Modular','NAO', 'CAT'}
+		self.morphOptions = {'Modular','NAO', 'CAT', 'Custom'}
 		self.morphVar = StringVar(parent)
 		self.morphVar.set('Modular')
 		self.morphMenu = OptionMenu(parent,self.morphVar,*self.morphOptions)
@@ -185,6 +185,8 @@ class MorphologyParameters(Frame):
 			row.append('5')
 		elif(self.morphVar.get() == 'CAT'):
 			row.append('0')
+		elif(self.morphVar.get() == 'Custom'):
+			row.append('5')
 		data.append(row)
 		row = []
 		if (self.morphVar.get() == 'Modular'):

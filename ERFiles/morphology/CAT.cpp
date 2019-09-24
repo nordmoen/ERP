@@ -33,7 +33,7 @@ void CAT::init_noMorph() {
 }
 
 void CAT::init(){
-	create();
+	//create();
 	unique_ptr<ControlFactory> controlFactory(new ControlFactory);
 	control = controlFactory->createNewControlGenome(0, settings,  randomNum); // ann
 	controlFactory.reset();

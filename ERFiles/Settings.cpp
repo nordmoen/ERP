@@ -353,14 +353,6 @@ void Settings::readSettings() {
 					cout << "----SOLAR GENERATIVE MORPHOLOGY----" << endl;
 					morphologyType = CUSTOM_SOLAR_GENERATIVE;
 					break;
-				case TISSUE_DIRECT:
-					cout << "----TISSUE_DIRECT----" << endl;
-					morphologyType = TISSUE_DIRECT;
-					break;
-				case TISSUE_GMX:
-					cout << "----TISSUE_GMX----" << endl;
-					morphologyType = TISSUE_GMX;
-					break;
 				}
                 cout << "=====================================" << endl;
             }
