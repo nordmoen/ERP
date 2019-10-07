@@ -47,26 +47,24 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="big-title text-center">
-                            <h1>Evolutionary Robotics Plugin for V-REP</h1>
-                            <p class="lead">Controllers</p>
+                            <h1>Installation</h1>
+                            <p class="lead"></p>
                         </div>
                         <!-- end title -->
                     </div>
                     <!-- end 12 -->
                 </div>
                 <!-- end row -->
-
-                <hr>
-
             </section>
         </div>
         <div class="row">
-
             <div class="col-md-3">
                 <nav class="docs-sidebar" data-spy="affix" data-offset-top="300" data-offset-bottom="200" role="navigation">
                     <ul class="nav">
                         <li><a href="index.html">Home</a></li>
                         <li><a href="gettingstarted.html">Getting Started</a></li>
+                        <li><a href="InstallingAndEvolving.html"> <small> &nbsp;  > Installation</small></a></li>
+                        <li><a href="EvolvingCustomMorph.html"> <small> &nbsp;  > Evolving a Custom Morphology</small></a></li>
                         <li><a href="EA.html">Evolutionary Algorithm</a></li>
                         <li><a href="morphologies.html">Morphologies</a></li>
                         <li><a href="controllers.html">Controllers</a></li>
@@ -79,31 +77,19 @@
             </div>
 
             <div class="col-md-9">
-                <section class="section">
+                <h1>
+                </h1>
                     <div class="row">
                         <div class="col-md-12 full">
-                            <hr>
                             <div>
                                 <p>
-                                    The controller object in ERP is an abstract class that can be used to control the robot, or part of the robot.
-                                    A simple artificial neural network ("ANN") is implemented by default when evolving robots. This neural network 
-                                    starts of with a simple feedforward connection of neurons and connects the neurons to one another in subsequent layers. 
-                                    Mutation operators allow the controller to change by (1) altering the topologies, (2) adjusting the weights and (3), changing the activation functions.
-                                    
+                                    For installing the plugin, please take a look at the <a href="https://github.com/FrankVeenstra/ERP"> GitHub README page  </a>
                                 </p>
-                                <p>
-                                    Since the pluign has mainly been used for evolving modular robots, no complex neural network has been implemented. However, the architecture
-                                    should allow one to easily integrate various types of neural networks be it feedforward or multilayered networks. 
-                                    To simply evolve modular robots with open loop controllers (each module containing its own small activation function), you can simply
-                                    set "controlType" in the settings to CustomANN.
-                                </p>
-
                             </div>
                         </div>
 
                     </div>
                     <!-- end row -->
-                </section>
             </div>
             <!-- // end .row -->
         </div>

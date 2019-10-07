@@ -47,26 +47,24 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="big-title text-center">
-                            <h1>Evolutionary Robotics Plugin for V-REP</h1>
-                            <p class="lead">Controllers</p>
+                            <h1>Getting Started</h1>
+                            <p class="lead">Evolving a custom morphology</p>
                         </div>
                         <!-- end title -->
                     </div>
                     <!-- end 12 -->
                 </div>
                 <!-- end row -->
-
-                <hr>
-
             </section>
         </div>
         <div class="row">
-
             <div class="col-md-3">
                 <nav class="docs-sidebar" data-spy="affix" data-offset-top="300" data-offset-bottom="200" role="navigation">
                     <ul class="nav">
                         <li><a href="index.html">Home</a></li>
                         <li><a href="gettingstarted.html">Getting Started</a></li>
+                        <li><a href="InstallingAndEvolving.html"> <small> &nbsp;  > Installation</small></a></li>
+                        <li><a href="EvolvingCustomMorph.html"> <small> &nbsp;  > Evolving a Custom Morphology</small></a></li>
                         <li><a href="EA.html">Evolutionary Algorithm</a></li>
                         <li><a href="morphologies.html">Morphologies</a></li>
                         <li><a href="controllers.html">Controllers</a></li>
@@ -79,31 +77,64 @@
             </div>
 
             <div class="col-md-9">
-                <section class="section">
+                <h1>
+                    Evolving a Custom Morphology
+                </h1>
                     <div class="row">
                         <div class="col-md-12 full">
-                            <hr>
                             <div>
                                 <p>
-                                    The controller object in ERP is an abstract class that can be used to control the robot, or part of the robot.
-                                    A simple artificial neural network ("ANN") is implemented by default when evolving robots. This neural network 
-                                    starts of with a simple feedforward connection of neurons and connects the neurons to one another in subsequent layers. 
-                                    Mutation operators allow the controller to change by (1) altering the topologies, (2) adjusting the weights and (3), changing the activation functions.
-                                    
+                                    You can evolve any robot model that can be simulated in V-REP. To do this, you'll have to modify the "CustomMorphology.cpp" file.
+                                    The plugin will load this custom morphology and automatically identify all the joints in the robot.
+                                    The output of the controller is also automatically connected to the joints and sets the target position for each joint (using "simSetJointTargetPosition").
+                                    The following example will show you how you can use the NAO robot in V-REP and evolve it. Note that how the controller and the fitness function is set up,
+                                    it is unlikely that a useful behavior will evolve. It requires some tweaking of the fitness function and controllers.
                                 </p>
+                                <h2>Step 1: Creating a morphology</h2>
                                 <p>
-                                    Since the pluign has mainly been used for evolving modular robots, no complex neural network has been implemented. However, the architecture
-                                    should allow one to easily integrate various types of neural networks be it feedforward or multilayered networks. 
-                                    To simply evolve modular robots with open loop controllers (each module containing its own small activation function), you can simply
-                                    set "controlType" in the settings to CustomANN.
+                                    Load the NAO robot in V-REP. <br />
+
+                                    Remove all associated child scripts from the NAO robot as displayed in the image below.
+                                    <img src="images/N1.png" alt="1.1">
+                                    <br />
+
+                                    Do the same for the jointRecorder object (press the + next to the NAO object to see all the objects in the tree hierarchy). <br />
+
+                                    The model can now be saved by selecting the base part of the model and going to "File->Save model as...". I saved this model file in the files folder with the name "NAOwithoutscript.ttm".
+                                </p>
+                                <h2>Step 2: Adjust the CustomMorphology.cpp file</h2>
+                                <p>
+                                    When loading a custom morphology you can use the function simLoadModel as shown below.
+                                    The absolute path can also be changed to a relative path (e.g. "models\\NAOwithoutsctipt.ttm")
+                                    <br />
+                                    <img src="images/N3.png" alt="3"> <br />
+
+                                    When evolving a custom morphology, make sure that the initial number of neurons equates the number of inputs and outputs. In the "init" function of the CustomMorphology (see image below)
+                                    you can see in line 234 that the controller is being initialized. By default this is used for an artificial neural network and the three arguments are:
+                                    the number of input neurons, the number of interneurons and the number of output neurons. <br />
+
+                                    <img src="images/N4.png" alt="4"> <br />
+
                                 </p>
 
+                                <h2>Step 3: Evolve the custom robot </h2>
+                                <p>
+                                    You can now evolve the robot by selecting "CUSTOM" in the morphology tab of the GUI: <br />
+                                    <img src="images/N6.png" alt="6"> <br />
+                                    Make sure that the controller is set to "ANN" and not to "Custom ANN" since the Custom ANN is not working yet.
+                                    <img src="images/N7.png" alt="7"> <br />
+                                </p>
+                                <h2>Next steps </h2>
+                                The neural network (ANN) that is by default incorporated for this controller is not very useful for evolving robots at the moment. 
+                                Initially, neurons are connected from layer to layer in a feedforward manner where each neuron initially only has one connection/weight. 
+                                The mutation operators are responsible for adding and removing connections and neurons and it can therefore take a while before a 
+                                suitable network evolves. By initially creating a fully interconnected network, it is likely that evolution will find interesting 
+                                behaviors at random. 
                             </div>
                         </div>
 
                     </div>
                     <!-- end row -->
-                </section>
             </div>
             <!-- // end .row -->
         </div>
