@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.0)
 project(ER)
 
-set(VREP_FOLDER "C:/Program Files/V-REP3/V-REP_PRO_EDU/")
+set(VREP_FOLDER $ENV{VREP_FOLDER})
 
 if (NOT VREP_FOLDER)
-    message(FATAL_ERROR "VREP_FOLDER variable not set, please set the variable to the vrep location. Example: -DVREP_FOLDER=/usr/share/vrep/")
+    message(FATAL_ERROR "VREP_FOLDER variable not set, please set the variable to the vrep location. Example: export VREP_FOLDER=/usr/share/vrep/")
 else()
     if (WIN32)
         set(VREP_LIB_FOLDER "${VREP_FOLDER}")
@@ -50,9 +50,9 @@ set(SOURCES
     ERFiles/env/MovingSunEnv.cpp
     ERFiles/env/RoughMoveEnv.cpp
     ERFiles/env/WaterEnv.cpp
-	ERFiles/env/TrainingEnvironment.cpp
-	ERFiles/env/CoEvolutionEnv.cpp
-	ERFiles/env/EnvPhototaxis.cpp
+    ERFiles/env/TrainingEnvironment.cpp
+    ERFiles/env/CoEvolutionEnv.cpp
+    ERFiles/env/EnvPhototaxis.cpp
 
     ERFiles/ER_VREP.cpp
     ERFiles/ER.cpp

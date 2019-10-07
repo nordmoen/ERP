@@ -59,30 +59,44 @@ However, in order to store all the data of an evolutionary run, you are required
 This additional step is not needed when the GUI is used (The GUI automatically generates these folders).
 
 #### Compiling the code (Linux)
+You can use [CMake](https://cmake.org/) to compile the code on Linux. (also on
+windows if you're not using visual studio).
 
-You can use CMake to compile the code on Linux. (also on windows if you're not using visual studio)
+The first thing you need to do is to create a `build` directory and call
+`cmake`.
 
-(1) Once the files are downloaded create a "build" directory in the folder of the downloaded files.
+```bash
+$ cd /path/to/ERP
+$ mkdir build
+$ cd build/
+# Export path to VREP source folder,
+# Note that in Windows you can export using 'SETX VREP_FOLDER C:\path\to\VREP'
+$ export VREP_FOLDER=/path/to/VREP_source_code
+# Configure CMake
+$ cmake ..
+```
 
-(2) Adjust the repository in the first line of the "CMakeList.txt" file (line 4) to the your V-REP installation directory.
+Then we need to build the source code by running `make`
 
-(3) cd to this "build" directory and run "cmake ../" . 
+```bash
+$ make
+# Or for multi-threaded build
+# make -j
+$ make install
+```
 
-(4) run "make" to compile the code
+Test your build by running V-REP with argument `-g0` and `-g2`
 
-(5) After compilation, move the lib_vrepExtER.so file in the main directory of V-REP. 
+```bash
+$ cd /path/to/VREP_source_code
+$ ./vrep.sh -g0 -g2
+```
 
-(6.1) move the "catModel.ttm" and "Servo_Module.ttm" files to the in the "models" directory.
-
-(6.2) move the "DefaultERLight.ttt" file to the "scenes" folder. 
-
-(7) You can now open V-REP with the arguments -g0 and -g2 to see some robots evolving. : "./vrep.sh -g0 -g2"
-
-If nothing happens or an error pops up, it might be due to the settings file not being properly deleted (see "Running evolutionary experiments" below)
-
-The first three arguments you give to V-REP should tell the plugin (1) the experiment number, (2) the running mode, and (3) the location of the saved files. 
-The location of the saved files can be specified by giving the third argument like "-gfiles". It will search for the "files" directory and store data here. 
-You can also use an absolute path for the third argument.  
+The first three arguments you give to V-REP should tell the plugin (`0`) the
+experiment number and (`2`) the running mode. The location of the saved files
+can be specified by giving the third argument like `-gfiles`. It will search for
+the "files" directory and store data here. You can also use an absolute path for
+the third argument.  
 
 #### Running the GUI
 

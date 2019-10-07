@@ -9,8 +9,4 @@ install(FILES
         C_Sensor.ttm
         C_Wheel.ttm
         C_Servo.ttm
-        brainOrgan.ttm
-        gripper.ttm
-        motorOrgan.ttm
-        sensorOrgan.ttm
         DESTINATION ${VREP_FOLDER}/models)
