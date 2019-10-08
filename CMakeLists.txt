@@ -114,6 +114,7 @@ target_include_directories(ER_library PUBLIC
 set_target_properties(ER_library PROPERTIES 
     CXX_STANDARD 14
     # COMPILE_FLAGS "-w"
+    -Wall -pedantic
     POSITION_INDEPENDENT_CODE ON
 )
 

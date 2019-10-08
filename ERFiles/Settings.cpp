@@ -36,7 +36,7 @@ Settings::Settings() {
 	initialInterNeurons = 1;
 	initialOutputNeurons = 1;
 	initialAmountConnectionsNeurons = 1;
-	evolutionType = STEADY_STATE;
+	evolutionType = MAP_ELITES;
 	seed = 0;
 //	instanceType = INSTANCE_REGULAR;
 	morphMutRate = 0.1;

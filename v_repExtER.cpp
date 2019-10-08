@@ -127,6 +127,7 @@ VREP_DLLEXPORT unsigned char v_repStart(void* reservedPointer, int reservedInt)
 		// 1: seed and location
 		int run = 0;
 		simChar* arg1_param = simGetStringParameter(sim_stringparam_app_arg1);
+    // TODO: check IF
 		if (arg1_param != NULL) {
 			run = atoi(arg1_param);
 			std::cout << "run is set to " << arg1_param << std::endl;

@@ -129,7 +129,8 @@ public:
 		EMBODIED_EVOLUTION = 4,
 		EMPTY_RUN = 5,
 		COEVOLUTION = 6,
-		AFPO
+		AFPO = 7,
+    MAP_ELITES = 8,
 	};
 
 	enum InstanceType {

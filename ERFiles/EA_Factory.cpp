@@ -1,4 +1,5 @@
 #include "EA_Factory.h"
+#include "map_elites/MapElites.hpp"
 
 
 EA_Factory::EA_Factory()
@@ -35,6 +36,15 @@ shared_ptr<EA> EA_Factory::createEA()
 		m_ea->settings = st;
 		return m_ea;
 	}
+  case 8: {
+		if (st->verbose) {
+			cout << "MAP-Elites EA" << endl;
+		}
+		unique_ptr<EA> m_ea(new map_elites::MapElites);
+		m_ea->randomNum = RandNum::getInstance();
+		m_ea->settings = st;
+		return m_ea;
+  }
 	default:
 		if (st->verbose) {
 			cout << "Steady state EA" << endl;
