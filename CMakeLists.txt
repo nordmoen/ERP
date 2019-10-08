@@ -22,7 +22,6 @@ else()
     endif()
 endif()
 
-
 set(SOURCES
     ERFiles/control/ANN.cpp
     ERFiles/control/Control.cpp
@@ -98,6 +97,11 @@ set(SOURCES
     #	ERFiles/module/Module_Brain.cpp
     #	ERFiles/module/Module_Rectangle.cpp
     #	ERFiles/module/Module_Spring.cpp
+
+    # MAP-Elites sources:
+    ERFiles/map_elites/Map.cpp
+    ERFiles/map_elites/MapElites.cpp
+    ERFiles/map_elites/NumModules.cpp
 )
 
 add_library(ER_library STATIC ${SOURCES})
@@ -126,6 +130,7 @@ target_include_directories(v_repExtER PUBLIC
 set_target_properties(v_repExtER PROPERTIES 
     CXX_STANDARD 14
     # COMPILE_FLAGS "-w"
+    -Wall -pedantic
     POSITION_INDEPENDENT_CODE ON
 )
 
