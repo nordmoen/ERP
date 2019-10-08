@@ -80,11 +80,10 @@ bool Development::loadGenome(int individualNumber, int sceneNum)
 			//		std::exit(1);
 		}
 		bool load = this->loadGenome(genomeFile, individualNumber);
-		return load;
 		genomeFile.close();
+		return load;
 
-	}
-	else {
+	} else {
 		genomeFileName << settings->repository + "/genomes" << sceneNum << "/genome" << individualNumber << ".csv";
 		std::cout << "Loading genome" << genomeFileName.str() << std::endl;
 		ifstream genomeFile(genomeFileName.str());
@@ -94,12 +93,10 @@ bool Development::loadGenome(int individualNumber, int sceneNum)
 			//		std::exit(1);
 		}
 		bool load = this->loadGenome(genomeFile, individualNumber);
-		return load;
 		genomeFile.close();
+		return load;
 
 	}
-	
-
 }
 
 bool Development::loadGenome(std::istream &input, int individualNumber)
@@ -521,6 +518,7 @@ int Development::getMainHandle() {
 	}
 	else {
 		cout << "ERROR: No module could be created, check initial position of the first module. " << endl;
+    return -1;
 	}
 }
 

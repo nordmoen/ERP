@@ -1,5 +1,7 @@
 #include "EA_CoEvolution.h"
 #include <algorithm>
+#include "morphology/MorphologyFactory.h"
+#include "DefaultGenome.h"
 
 
 EA_CoEvolution::EA_CoEvolution()
@@ -81,10 +83,10 @@ void EA_CoEvolution::initializePopulation()
 	unique_ptr<GenomeFactory> gf = unique_ptr<GenomeFactory>(new GenomeFactory);
 	for (int i = 0; i < settings->populationSize; i++)
 	{
-		nextGenGenomes.push_back(gf->createGenome(1));
+		nextGenGenomes.push_back(gf->createGenome(GenomeType::Default));
 		nextGenGenomes[i]->fitness = 0;
 		nextGenGenomes[i]->individualNumber = i;
-		nextGenGenomes2.push_back(gf->createGenome(1));
+		nextGenGenomes2.push_back(gf->createGenome(GenomeType::Default));
 		nextGenGenomes2[i]->fitness = 0;
 		nextGenGenomes2[i]->individualNumber = i;
 	}
@@ -392,7 +394,7 @@ void EA_CoEvolution::loadPopulationGenomes(int sceneNum)
 	unique_ptr<GenomeFactory> gf = unique_ptr<GenomeFactory>(new GenomeFactory);
 	for (int i = 0; i < settings->indNumbers.size(); i++) {
 		cout << "loading individual " << settings->indNumbers[i] << endl;
-		populationGenomes.push_back(gf->createGenome(1));
+		populationGenomes.push_back(gf->createGenome(GenomeType::Default));
 		populationGenomes[i]->loadMorphologyGenome(settings->indNumbers[i], settings->sceneNum);
 		//cout << "Make sure the following is correct" << endl;
 		populationGenomes[i]->fitness = settings->indFits[i];
@@ -401,7 +403,7 @@ void EA_CoEvolution::loadPopulationGenomes(int sceneNum)
 	}
 	for (int i = 0; i < settings->coIndNumbers.size(); i++) {
 		cout << "loading individual " << settings->coIndNumbers[i] << endl;
-		populationGenomes2.push_back(gf->createGenome(1));
+		populationGenomes2.push_back(gf->createGenome(GenomeType::Default));
 		populationGenomes2[i]->loadMorphologyGenome(settings->coIndNumbers[i], settings->sceneNum);
 		//cout << "Make sure the following is correct" << endl;
 		populationGenomes2[i]->fitness = settings->coIndFits[i];

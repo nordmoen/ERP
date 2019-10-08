@@ -1,4 +1,3 @@
-#pragma once
 #include "Neuron.h"
 #include <iostream>
 

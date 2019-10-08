@@ -174,6 +174,7 @@ public:
 	int maxGeneration = 1000;
 	int xGenerations = 4;
 	int populationSize = 3;
+  int initialPopulationSize = 1000;
 	int individualCounter = 0;
 	int crossover = 0;
 	float crossoverRate = 0;

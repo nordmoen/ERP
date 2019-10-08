@@ -1,14 +1,11 @@
 #pragma once
-#include <vector>
-//#include "Morphology.h"
-//#include "LMorphology.h"
-//#include "Control.h"
-#include "morphology/MorphologyFactory.h"
-#include "control/ControlFactory.h"
-#include <memory>
+#include "Genome.h"
 #include "RandNum.h"
 #include "Settings.h"
-#include "Genome.h"
+#include "control/ControlFactory.h"
+#include "morphology/MorphologyFactory.h"
+#include <memory>
+#include <vector>
 
 class DefaultGenome : public Genome
 {
@@ -16,7 +13,7 @@ public:
 	DefaultGenome();
 	
 	~DefaultGenome();
-	virtual shared_ptr<Genome> clone() const override;
+	std::shared_ptr<Genome> clone() const override;
 
 	void createInitialMorphology(int individualNumber);
 
@@ -26,23 +23,23 @@ public:
 	float mutationRate = 0.05f;
 	float parentPhenValue;
 
-	void savePhenotype(int indNum, int sceneNum);
-	virtual void init() override;
-	virtual void create() override;
-	virtual void update() override; 
-	virtual void mutate() override;
-	virtual bool loadGenome(int indNum, int sceneNum) override;
-	virtual bool loadGenome(std::istream &input, int indNum) override;
-	virtual void saveGenome(int indNum) override;
-	virtual const std::string generateGenome() const override;
-	virtual void clearGenome() override;
-	virtual void checkGenome() override;
-	virtual bool loadMorphologyGenome(int indNum, int sceneNum) override;
-	virtual bool loadMorphologyGenome(std::istream &input, int indNum) override;
-	shared_ptr<Genome> cloneGenome();
+	void savePhenotype(int indNum, int sceneNum) override;
+	void init() override;
+	void create() override;
+	void update() override;
+	void mutate() override;
+	bool loadGenome(int indNum, int sceneNum) override;
+	bool loadGenome(std::istream &input, int indNum) override;
+	void saveGenome(int indNum) override;
+	const std::string generateGenome() const override;
+	void clearGenome() override;
+	void checkGenome() override;
+	bool loadMorphologyGenome(int indNum, int sceneNum) override;
+	bool loadMorphologyGenome(std::istream &input, int indNum) override;
+  std::shared_ptr<Genome> cloneGenome();
 
 	void init_noMorph();
-	void createAtPosition(float x, float y, float z);
+	void createAtPosition(float x, float y, float z) override;
 
 	//void mutate();
 	float genomeFitness;  

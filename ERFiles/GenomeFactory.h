@@ -1,16 +1,18 @@
 #pragma once
 #include <memory>
 #include "Genome.h"
-#include "DefaultGenome.h"
-//#include "DefaultGenomeVREP.h"
+
+enum class GenomeType {
+  Default,
+};
 
 class GenomeFactory
 {
 public:
 	GenomeFactory();
 	~GenomeFactory();
-	shared_ptr<Genome> createGenome(int type);
-	shared_ptr<Genome> copyGenome(shared_ptr<Genome> parentMorphology);
+  std::shared_ptr<Genome> createGenome(const GenomeType& type);
+  std::shared_ptr<Genome> copyGenome(std::shared_ptr<Genome> parentMorphology);
 	RandNum* randomNum;
 };
 

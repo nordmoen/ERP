@@ -59,7 +59,7 @@ int Module_Cube::createModule(vector<float> configuration, int relativePosHandle
 	float zeroOrigin[3] = { 0,0,0 };
 
 	float relPos[3];
-	simGetObjectPosition(relativePosHandle, NULL, relPos);
+	simGetObjectPosition(relativePosHandle, 0, relPos);
 	phenV = 0;
 	phenV += relPos[0];
 	phenV += relPos[1];

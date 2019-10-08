@@ -359,7 +359,7 @@ shared_ptr<Morphology> ER_VREP::getMorphology(Genome* g)
 bool ER_VREP::loadIndividual(int individualNum)
 {
 	std::cout << "loading individual " << individualNum << ", sceneNum " << settings->sceneNum << endl;
-	currentGenome = genomeFactory->createGenome(0);
+	currentGenome = genomeFactory->createGenome(GenomeType::Default);
 	// try to load from signal
 	simInt signalLength = -1;
 	simInt signalLengthVerify = -1;
@@ -482,7 +482,7 @@ void ER_VREP::loadBestIndividualGenome(int sceneNum)
 	randNum->setSeed(settings->seed + bestInd * bestInd);
 
 	currentGenome.reset();
-	currentGenome = genomeFactory->createGenome(1);
+	currentGenome = genomeFactory->createGenome(GenomeType::Default);
 	currentGenome->init();	//	cout << "loading" << endl;
 	currentGenome->loadMorphologyGenome(bestInd, settings->sceneNum);
 }

@@ -133,7 +133,7 @@ void EA::loadPopulationGenomes()
 	unique_ptr<GenomeFactory> gf = unique_ptr<GenomeFactory>(new GenomeFactory);
 	for (int i = 0; i < settings->indNumbers.size(); i++) {
 		cout << "loading individual " << settings->indNumbers[i] << endl;
-		populationGenomes.push_back(gf->createGenome(1));
+		populationGenomes.push_back(gf->createGenome(GenomeType::Default));
 		populationGenomes[i]->loadMorphologyGenome(settings->indNumbers[i], settings->sceneNum);
 		//cout << "Make sure the following is correct" << endl;
 		populationGenomes[i]->fitness = settings->indFits[i];

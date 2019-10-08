@@ -45,9 +45,8 @@ shared_ptr<Control> ControlFactory::createNewControlGenome(int type, Settings* s
 	else if (st->controlType == st->ANN_NEAT) {
 		cout << "ERROR: Neat is not yet set up" << endl;
 	}
+  return nullptr;
 }
-
-
 
 shared_ptr<Control> ControlFactory::copyControlGenome(shared_ptr<Control> parent) 
 {

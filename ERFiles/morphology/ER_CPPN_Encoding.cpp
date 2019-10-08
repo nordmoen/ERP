@@ -896,6 +896,7 @@ int ER_CPPN_Encoding::getMainHandle() {
 	}
 	else {
 		cout << "ERROR: No module could be created, check initial position of the first module. " << endl;
+    return -1;
 	}
 }
 

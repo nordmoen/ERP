@@ -578,6 +578,7 @@ int ER_DirectEncoding::getMainHandle() {
 	}
 	else {
 		cout << "ERROR: No module could be created, check initial position of the first module. " << endl;
+    return -1;
 	}
 }
 

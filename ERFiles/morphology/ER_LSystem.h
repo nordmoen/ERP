@@ -1,6 +1,6 @@
 #pragma once
 
-#include <vector>;
+#include <vector>
 #include "Development.h"
 #include "../module/ModuleFactory.h"
 

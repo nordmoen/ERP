@@ -1,4 +1,6 @@
 #include "EA_SteadyState.h"
+#include "DefaultGenome.h"
+#include "morphology/MorphologyFactory.h"
 #include <algorithm>
 
 
@@ -71,7 +73,7 @@ void EA_SteadyState::initializePopulation()
 	unique_ptr<GenomeFactory> gf = unique_ptr<GenomeFactory>(new GenomeFactory);
 	for (int i = 0; i < settings->populationSize; i++)
 	{
-		nextGenGenomes.push_back(gf->createGenome(1));
+		nextGenGenomes.push_back(gf->createGenome(GenomeType::Default));
 		nextGenGenomes[i]->fitness = 0;
 		nextGenGenomes[i]->individualNumber = i;
 	}
