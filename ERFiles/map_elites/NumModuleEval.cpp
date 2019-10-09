@@ -7,6 +7,7 @@ const std::pair<float, float> NumModuleEval::behavior(const std::shared_ptr<Geno
   const auto modules = genome->morph->createdModules;
   float movable, non_movable;
   for(const auto module : modules) {
+    // '4' means that the module should be movable
     if(module->type == 4) {
       movable += 1;
     } else {
