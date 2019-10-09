@@ -4,6 +4,7 @@
 #include "../map_elites/NumModuleEval.hpp"
 #include "../morphology/MorphologyFactory.h"
 #include <cassert>
+#include <fstream>
 #include <iostream>
 #include <stdexcept>
 #include <utility>
@@ -65,7 +66,8 @@ namespace map_elites {
   void MapElites::replacement() {
     // Try each genome in 'nextGenGenomes' and try to insert into map
     for(const auto genome : nextGenGenomes) {
-      _storage->insert(_eval->behavior(genome), genome);
+      const auto behavior = _eval->behavior(genome);
+      _storage->insert(behavior, genome);
     }
     // Once everything has been tried we clear the list, preparing for the next
     // batch
@@ -78,5 +80,38 @@ namespace map_elites {
 
   void MapElites::savePopFitness(int generation) {
     std::cout << "MapElites generation: " << generation << std::endl;
+    if(_storage != nullptr) {
+      const std::string folder = settings->repository + "/map_elites" + std::to_string(settings->sceneNum);
+      // Save map to separate CSV file
+      std::string map_filename = folder + "/map_generation_" +
+          std::to_string(generation) + ".csv";
+      ofstream map_csv(map_filename);
+      try {
+        map_csv << *_storage << std::endl;
+      } catch(const std::exception& ex) {
+        std::cerr << "Caught exception when trying to write Map to CSV\n\t" <<
+            ex.what() << std::endl;
+      } catch(...) {
+        std::cerr << "Uncaught exception when writing Map!" << std::endl;
+      }
+      // Re-open statistics file and output data
+      try{
+        std::string stat_filename = folder + "/map_elites_stats.csv";
+        ofstream stats_csv;
+        stats_csv.open(stat_filename, std::ios::out | std::ios::app);
+        stats_csv << generation << "," << _storage->dimensions().first << "," <<
+            _storage->dimensions().second << "," << _storage->size() << "," <<
+            _storage->coverage() << "," << _storage->reliability() << "," <<
+            _storage->precision() << std::endl;
+      } catch(const std::exception& ex) {
+        std::cerr << "Caught exception when trying to write statistics to CSV\n\t" <<
+            ex.what() << std::endl;
+      } catch(...) {
+        std::cerr << "Uncaught exception when writing statistics!" << std::endl;
+      }
+    } else {
+      std::cerr << "Could not create output from MapElites for generation " <<
+          generation << ", '_storage' is nullptr!" << std::endl;
+    }
   }
 }

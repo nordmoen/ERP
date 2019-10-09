@@ -5,7 +5,8 @@
 namespace map_elites {
 const std::pair<float, float> NumModuleEval::behavior(const std::shared_ptr<Genome> genome) const {
   const auto modules = genome->morph->createdModules;
-  float movable, non_movable;
+  float movable = 0.0;
+  float non_movable = 0.0;
   for(const auto module : modules) {
     // '4' means that the module should be movable
     if(module->type == 4) {

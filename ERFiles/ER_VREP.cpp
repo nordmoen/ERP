@@ -120,7 +120,7 @@ void ER_VREP::startOfSimulation() {
 				if (settings->verbose) {
 					cout << "creating individual" << endl;
 				}
-				currentGenome = ea->nextGenGenomes[settings->indCounter]->clone();
+				currentGenome = ea->nextGenGenomes[settings->indCounter];
 				//currentGenome->init(); // should not initialize base class
 				currentGenome->create();
 				// ea->newGenome = ea->populationGenomes[settings->indCounter];

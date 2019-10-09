@@ -39,7 +39,7 @@ Settings::Settings() {
 	evolutionType = MAP_ELITES;
 	seed = 0;
 //	instanceType = INSTANCE_REGULAR;
-	morphMutRate = 0.1;
+	morphMutRate = 0.4;
 	mutationRate = 0.1;
 	maxGeneration = 600;
 	maxAddedNeurons = 2;
@@ -686,12 +686,12 @@ void Settings::saveSettings() {
 	}	settingsFile << endl;
 
 	settingsFile << ",#individuals,";
-	for (int i = 0; i < populationSize; i++) {
+	for (int i = 0; i < indNumbers.size(); i++) {
 		settingsFile << indNumbers[i] << ","; // must be set when saving
 	} settingsFile << endl;
 	if (indFits.size() > 0) {
 		settingsFile << ",#indFits,";
-		for (int i = 0; i < populationSize; i++) {
+		for (int i = 0; i < indFits.size(); i++) {
 			settingsFile << indFits[i] << ","; // must be set when saving
 		}
 	}	
