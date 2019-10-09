@@ -101,7 +101,7 @@ set(SOURCES
     # MAP-Elites sources:
     ERFiles/map_elites/Map.cpp
     ERFiles/map_elites/MapElites.cpp
-    ERFiles/map_elites/NumModules.cpp
+    ERFiles/map_elites/NumModuleEval.cpp
 )
 
 add_library(ER_library STATIC ${SOURCES})
@@ -109,12 +109,12 @@ add_library(ER_library STATIC ${SOURCES})
 
 target_include_directories(ER_library PUBLIC
     "${VREP_FOLDER}/programming/include"
+    ERFiles/
 )
 
 set_target_properties(ER_library PROPERTIES 
     CXX_STANDARD 14
     # COMPILE_FLAGS "-w"
-    -Wall -pedantic
     POSITION_INDEPENDENT_CODE ON
 )
 
@@ -131,7 +131,6 @@ target_include_directories(v_repExtER PUBLIC
 set_target_properties(v_repExtER PROPERTIES 
     CXX_STANDARD 14
     # COMPILE_FLAGS "-w"
-    -Wall -pedantic
     POSITION_INDEPENDENT_CODE ON
 )
 

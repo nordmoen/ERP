@@ -1,5 +1,7 @@
-#include "../GenomeFactory.h"
 #include "../map_elites/MapElites.hpp"
+
+#include "../GenomeFactory.h"
+#include "../map_elites/NumModuleEval.hpp"
 #include "../morphology/MorphologyFactory.h"
 #include <cassert>
 #include <iostream>
@@ -11,7 +13,7 @@ namespace map_elites {
     const auto st = Settings::getInstance();
     // First initialize underlying storage
     _storage.reset(new Map(std::make_pair(st->maxAmountModules, st->maxAmountModules)));
-    _eval.reset(new NumModuleEval());
+    _eval.reset(new NumModuleEval);
     // Initialize algorithm with initial population
     GenomeFactory gf;
     for(size_t i = 0; i < settings->initialPopulationSize; ++i){

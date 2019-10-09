@@ -1,14 +1,15 @@
 #pragma once
 
+/**
+ * Implementation for the MAP-Elites algorithm
+ */
+
 #include "../EA.h"
 #include "../map_elites/Map.hpp"
 #include "../map_elites/Evaluator.hpp"
 #include <memory>
 
 namespace map_elites {
-/**
- * Implementation for the MAP-Elites algorithm
- */
 class MapElites: public EA {
  protected:
   // The actual map to which stores individuals (we use `unique_ptr` to allow

@@ -30,7 +30,8 @@ namespace map_elites {
         return false;
       }
     } else {
-      // There was not a genome present in the map for the given behavior
+      // There was no genome present in the map for the given behavior so we can
+      // insert with confidence
       _storage[idx] = genome;
       return true;
     }

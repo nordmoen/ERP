@@ -1,4 +1,4 @@
-#include "../map_elites/Evaluator.hpp"
+#include "../map_elites/NumModuleEval.hpp"
 #include "../Settings.h"
 #include <cassert>
 
