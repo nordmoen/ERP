@@ -686,12 +686,12 @@ void Settings::saveSettings() {
 	}	settingsFile << endl;
 
 	settingsFile << ",#individuals,";
-	for (int i = 0; i < populationSize; i++) {
+	for (int i = 0; i < indNumbers.size(); i++) {
 		settingsFile << indNumbers[i] << ","; // must be set when saving
 	} settingsFile << endl;
 	if (indFits.size() > 0) {
 		settingsFile << ",#indFits,";
-		for (int i = 0; i < populationSize; i++) {
+		for (int i = 0; i < indFits.size(); i++) {
 			settingsFile << indFits[i] << ","; // must be set when saving
 		}
 	}	

@@ -2,6 +2,7 @@
 
 #include "../Genome.h"
 #include <memory>
+#include <ostream>
 #include <utility>
 #include <vector>
 
@@ -43,5 +44,18 @@ class Map {
 
   // Get the number of individuals in the Map
   size_t size() const;
+
+  // Calculate the number of solutions divided by the maximum occupancy of the
+  // map
+  float coverage() const;
+
+  // Calculate the average fitness only counting filled cells
+  float precision() const;
+
+  // Calculate the average fitness for the whole map
+  float reliability() const;
+
+  // Helper method to output the map to file
+  friend std::ostream& operator<<(std::ostream& is, const Map& m);
 };
 }

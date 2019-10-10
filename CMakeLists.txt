@@ -99,6 +99,7 @@ set(SOURCES
     #	ERFiles/module/Module_Spring.cpp
 
     # MAP-Elites sources:
+    ERFiles/map_elites/Evaluator.hpp
     ERFiles/map_elites/Map.cpp
     ERFiles/map_elites/MapElites.cpp
     ERFiles/map_elites/NumModuleEval.cpp
@@ -109,7 +110,6 @@ add_library(ER_library STATIC ${SOURCES})
 
 target_include_directories(ER_library PUBLIC
     "${VREP_FOLDER}/programming/include"
-    ERFiles/
 )
 
 set_target_properties(ER_library PROPERTIES 

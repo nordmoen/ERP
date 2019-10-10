@@ -170,12 +170,12 @@ public:
 	bool sendGenomeAsSignal = false;
 	bool client;
 	float mutationRate = 0.1f;
-	float morphMutRate = 0.1f;
+	float morphMutRate = 0.2f;
 	int generation = 0;
 	int maxGeneration = 1000;
 	int xGenerations = 4;
 	int populationSize = 3;
-  int initialPopulationSize = 1000;
+  int initialPopulationSize = 100;
 	int individualCounter = 0;
 	int crossover = 0;
 	float crossoverRate = 0;

@@ -13,6 +13,6 @@
 namespace map_elites {
 class Evaluator {
  public:
-  virtual const std::pair<float, float> behavior(const std::shared_ptr<Genome>) const =0;
+  virtual const std::pair<float, float> behavior(const std::shared_ptr<Genome>) const = 0;
 };
 }
