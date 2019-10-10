@@ -803,7 +803,12 @@ int ER_LSystem::initializeLGenome(int type) {
 		lGenome->lParameters[i]->currentState = i;
 
 	}
-	mutateERLGenome(0.5);
+	for (int i = 0; i < 10; i++) {
+		mutateERLGenome(0.5);
+	}
+	if (settings->verbose) {
+		std::cout << "number of children state 0 = " << lGenome->lParameters[0]->childSiteStates.size()<< endl;
+	}
 	cf.reset();
 	return 1;
 }

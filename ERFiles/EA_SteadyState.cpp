@@ -48,6 +48,7 @@ void EA_SteadyState::selection()
 }
 
 
+
 void EA_SteadyState::replacement()
 {
 	if (populationGenomes.size() > 0) {
@@ -76,6 +77,7 @@ void EA_SteadyState::initializePopulation()
 		nextGenGenomes.push_back(gf->createGenome(GenomeType::Default));
 		nextGenGenomes[i]->fitness = 0;
 		nextGenGenomes[i]->individualNumber = i;
+		nextGenGenomes[i]->init();
 	}
 	gf.reset();
 }

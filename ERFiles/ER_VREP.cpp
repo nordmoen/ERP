@@ -94,45 +94,19 @@ void ER_VREP::startOfSimulation() {
 	// set the random seed
 	randNum->setSeed(settings->seed + settings->indCounter * settings->indCounter);
 
-	// old code snippet to be removed after evaluation:
-	// environment->initialPos.clear();
-	// environment->init();
-
 	if (settings->instanceType == settings->INSTANCE_SERVER) {
 		// If the simulation is a server. It just holds information for one genome for now. 
 		// currentGenome should be created, double check
-		currentGenome->create();
-		// OLD CODE:
-		// ea->newGenome->create(); 
-		// new genome should be initialized through api command. 
-		
+		currentGenome->create();		
 	}
 	else {
 		if (simSet != RECALLBEST) {
 			if (settings->verbose) {
 				cout << "Creating Individual " << settings->indCounter << endl;
 			}
-			if (settings->indCounter < ea->nextGenGenomes.size()) {
-				// First generation:
-				currentInd = settings->indCounter;
-				ea->nextGenGenomes[currentInd]->init();
-				//				ea->popIndNumbers.push_back(settings->indCounter);
-				if (settings->verbose) {
-					cout << "creating individual" << endl;
-				}
-				currentGenome = ea->nextGenGenomes[settings->indCounter];
-				//currentGenome->init(); // should not initialize base class
-				currentGenome->create();
-				// ea->newGenome = ea->populationGenomes[settings->indCounter];
-			}
-			else if (settings->indCounter >= ea->populationGenomes.size()) {
-				// != first generation
-				// ea->selection(); // selection done in end
-				// ea->newGenome->init();
-				currentInd = settings->indCounter % settings->populationSize;
-				currentGenome = ea->nextGenGenomes[currentInd]->clone();
-				currentGenome->create();
-			}
+			currentGenome.reset();
+			currentGenome = ea->fetchGenome();
+			currentGenome->create();
 		}
 
 		else if (simSet == RECALLBEST) {
@@ -277,6 +251,7 @@ void ER_VREP::endOfSimulation() {
 	/* At the end of the simulation the fitness value of the simulated individual
 	* is retrieved and stored in the appropriate files.
 	*/
+	currentGenome->isEvaluated = true;
 	if (settings->instanceType == settings->INSTANCE_DEBUGGING) {
 		return;
 	}
@@ -317,14 +292,23 @@ void ER_VREP::endOfSimulation() {
 					currentGenome->fitness = fitness;
 					currentGenome->savePhenotype(settings->indCounter, settings->sceneNum);
 				}
-				// TODO set fitness
 				ea->setFitness(settings->indCounter % ea->nextGenGenomes.size(), fitness);
 				currentGenome->morph->saveGenome(settings->indCounter, fitness);
 				cout << "FITNESS = " << fitness << endl;
 				settings->indCounter++;
 			}
-			if (settings->indCounter % ea->nextGenGenomes.size() == 0 && settings->indCounter != 0) {
-				ea->replacement();// replaceNewIndividual(settings->indCounter, sceneNum, fitness);
+			bool allEv = true; // check if all genomes are evaluated
+			for (const auto& g : ea->nextGenGenomes) {
+				if (g->isEvaluated == true) {
+					continue;
+				}
+				else {
+					allEv = false;
+				}
+			}
+
+			if (allEv == true) {
+				ea->replacement(); 
 				ea->selection();
 				ea->savePopFitness(generation);
 				generation++;
@@ -339,14 +323,6 @@ void ER_VREP::endOfSimulation() {
 			cout << "fitness = " << fitness << endl;
 			cout << "-----------------------------------" << endl;
 		}
-
-		// following uncommented code was necessary when V-REP itself contained a memory leak.
-		// if (newGenerations == settings->xGenerations) { // close v-rep every x generations
-		//	string lightName = "Light"; // +to_string(sceneNum);
-		//	int light_handle = simGetObjectHandle(lightName.c_str());
-		//	simRemoveObject(light_handle);
-		//	simQuitSimulator(false);
-		// }
 	}
 
 }

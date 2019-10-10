@@ -19,9 +19,8 @@ namespace map_elites {
     GenomeFactory gf;
     for(size_t i = 0; i < settings->initialPopulationSize; ++i){
       const auto genome = gf.createGenome(GenomeType::Default);
-      genome->fitness = 0.0;
       genome->individualNumber = i;
-      genome->isEvaluated = false;
+	  genome->init();
       nextGenGenomes.push_back(genome);
     }
   }
@@ -31,6 +30,8 @@ namespace map_elites {
       genome->mutate();
     }
   }
+
+  
 
   void MapElites::selection() {
     // Ensure that there are no stale genomes to evaluate
@@ -45,13 +46,10 @@ namespace map_elites {
     for(size_t i = 0; i < settings->populationSize; ++i) {
       // Select parent from Map
       const int parent = randomNum->randInt(parents.size(), 0);
-      // Create new empty genome
-      const auto genome = gf.createGenome(GenomeType::Default);
-      // Copy morphology
-      genome->morph = mfact.copyMorphologyGenome(parents[parent]->morph);
+	  // deep copy genome
+	  const auto genome = parents[parent]->clone();
+
       genome->individualNumber = i + settings->indCounter;
-      genome->fitness = 0.0;
-      genome->isEvaluated = false;
       // Add to be evaluated
       nextGenGenomes.push_back(genome);
     }

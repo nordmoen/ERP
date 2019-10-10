@@ -160,7 +160,8 @@ void DefaultGenome::mutate() {
 	if (morph == NULL) {
 		cout << "ERROR: morph == NULL" << endl;
 	}	
-	// TODO: The morphology mutation rate should be gathered from the settings file in the mutate function?
+	fitness = 0.0f;
+	isEvaluated = false;
 	morph->mutate(); 
 }
 
