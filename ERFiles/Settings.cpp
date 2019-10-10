@@ -24,7 +24,7 @@ Settings::Settings() {
 	maxAmountModules = 20;
 	// morphologyType = CUSTOM_MORPHOLOGY; // MODULAR_DIRECT;
 	morphologyType = MODULAR_LSYSTEM;
-	populationSize = 20;
+	populationSize = 1;
 	energyDissipationRate = 0.0;
 	lIncrements = 4; // not used, should be somewhere else?
 //	environmentType = ENV_SWITCHOBJECTIVE;
@@ -36,10 +36,10 @@ Settings::Settings() {
 	initialInterNeurons = 1;
 	initialOutputNeurons = 1;
 	initialAmountConnectionsNeurons = 1;
-	evolutionType = MAP_ELITES;
+	evolutionType = STEADY_STATE;
 	seed = 0;
 //	instanceType = INSTANCE_REGULAR;
-	morphMutRate = 0.1;
+	morphMutRate = 0.9;
 	mutationRate = 0.1;
 	maxGeneration = 600;
 	maxAddedNeurons = 2;
