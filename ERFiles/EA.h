@@ -45,6 +45,9 @@ public:
 	virtual void replacement() = 0; 
 	// Mutation operator
 	virtual void mutation() = 0;
+
+	virtual shared_ptr<Genome> fetchGenome();
+
 	
 	// Creates the individual in VREP
 	void createIndividual(int indNum);

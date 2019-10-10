@@ -142,3 +142,12 @@ void EA::loadPopulationGenomes()
 	}
 	gf.reset();
 }
+
+shared_ptr<Genome> EA::fetchGenome() {
+	for (const auto& g : nextGenGenomes) {
+		if (g->isEvaluated == false) {
+			return g;
+		}
+	}
+	throw std::runtime_error("Trying to fetch genome while all genomes are already evaluated (EA.cpp)");
+}

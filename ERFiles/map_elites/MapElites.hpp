@@ -26,6 +26,8 @@ class MapElites: public EA {
   void replacement() override;
   void mutation() override;
 
+
+
   void loadPopulationGenomes();
   void savePopFitness(int) override;
 };
