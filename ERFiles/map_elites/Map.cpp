@@ -105,16 +105,18 @@ namespace map_elites {
 
   std::ostream& operator<<(std::ostream& os, const Map& m) {
     // Output Map in CSV format, one solution per line
-    os << "x,y,fitness" << std::endl;
+    os << "x,y,fitness,id" << std::endl;
     for(size_t x = 0; x < m._dims.first; ++x) {
       for(size_t y = 0; y < m._dims.second; ++y) {
         const auto index = y * m._dims.first + x;
         const auto& val = m._storage[index];
         float fitness = -1;
+        int id = -1;
         if(val != nullptr) {
           fitness = val->fitness;
+          id = val->individualNumber;
         }
-        os << x << "," << y << "," << fitness << std::endl;
+        os << x << "," << y << "," << fitness << "," << id << std::endl;
       }
     }
     return os;
