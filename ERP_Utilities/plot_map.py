@@ -46,7 +46,7 @@ def _parse_map(fil):
             if row:
                 x = int(row[0])
                 y = int(row[1])
-                fitness = float(row[3])
+                fitness = float(row[2])
                 if fitness != -1:
                     map_dict[(x, y)] = fitness
                     size_x = max(x, size_x)
